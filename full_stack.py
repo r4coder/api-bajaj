@@ -1,18 +1,23 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
+from typing import List
 import re
 
 app = FastAPI()
 
 class DataModel(BaseModel):
-    data: list
+    data: List[str]
 
-def alternating_caps_reverse(s):
+def alternating_caps_reverse(s: str) -> str:
     result, toggle = "", True
     for ch in s[::-1]:
         result += ch.upper() if toggle else ch.lower()
         toggle = not toggle
     return result
+
+@app.get("/")
+async def root():
+    return {"message": "API is running. Use POST /bfhl to test."}
 
 @app.post("/bfhl")
 async def process_data(req: DataModel):
@@ -25,7 +30,10 @@ async def process_data(req: DataModel):
             if re.fullmatch(r"\d+", item):
                 num = int(item)
                 total_sum += num
-                (even_numbers if num % 2 == 0 else odd_numbers).append(item)
+                if num % 2 == 0:
+                    even_numbers.append(item)
+                else:
+                    odd_numbers.append(item)
             elif item.isalpha():
                 alphabets.append(item.upper())
                 alpha_string += item
@@ -46,4 +54,3 @@ async def process_data(req: DataModel):
         }
     except Exception as e:
         return {"is_success": False, "message": str(e)}
-
