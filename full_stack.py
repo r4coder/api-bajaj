@@ -17,7 +17,7 @@ def alternating_caps_reverse(s: str) -> str:
 
 @app.get("/")
 async def root():
-    return {"message": "API is running. Use POST /bfhl to test."}
+    return {"message": "is_success."}
 
 @app.post("/bfhl")
 async def process_data(req: DataModel):
