@@ -1,1 +1,9 @@
+{
+  "builds": [
+    { "src": "full_stack.py", "use": "@vercel/python" }
+  ],
+  "routes": [
+    { "src": "/(.*)", "dest": "full_stack.py" }
+  ]
+}
 
