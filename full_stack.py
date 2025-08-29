@@ -42,7 +42,7 @@ async def process_data(req: DataModel):
 
         return {
             "is_success": True,
-            "user_id": "KURARITHEESH123",
+            "user_id": "kura_ritheesh_reddy_08042003",
             "email": "ritheeshk2003@gmail.com",
             "roll_number": "22BCE0561",
             "odd_numbers": odd_numbers,
